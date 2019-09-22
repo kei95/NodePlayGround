@@ -1,16 +1,7 @@
-const http = require('http')
-
-const server = http.createServer((req, res) => {
-    if(req.url === '/') {
-        res.write('hello world')
-        res.end(); 
-    }
-    if (req.url === '/api/courses'){
-        res.write(JSON.stringify([1, 2, 3]));
-        res.end(); 
-    }
-})
-
-server.listen(3000)
-
-console.log('Listening on port 3000...');
+const http = require('http');
+const fs = require('fs');
+http.createServer((req, res) => {
+    const readStream = fs.createReadStream('./static/index.html');
+    res.writeHead(200, {'content-type': 'text/html'});
+    readStream.pipe(res);
+}).listen(3000);
