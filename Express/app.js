@@ -10,8 +10,11 @@ app.get('/example', (req, res) => {
 })
 
 app.get('/example/:name/:age', (req, res) => {
+    //params == data which is required
+    //query == data which is optional
     console.log(req.params);
-    console.log('example with route params');
-})
+    console.log(req.query);
+    res.send(req.params.name + " : " + req.params.age);
+});
 
 app.listen(3000); 
